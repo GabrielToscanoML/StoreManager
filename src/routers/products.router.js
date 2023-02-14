@@ -1,4 +1,5 @@
 const express = require('express');
+const { validateProductName } = require('../middlewares/productsServices');
 const { insertProduct, getProductById, getAllProducts } = require('../models/products.model');
 
 const router = express.Router();
@@ -15,7 +16,9 @@ router.get('/products/:id', async (req, res) => {
   return res.status(404).json({ message: 'Product not found' });
 });
 
-router.post('/products', async (req, res) => {
+router.post('/products',
+  validateProductName,
+  async (req, res) => {
   const reqBody = req.body;
   const newId = await getAllProducts();
   const newProduct = {
