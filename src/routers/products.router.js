@@ -4,7 +4,7 @@ const { insertProduct, getProductById, getAllProducts } = require('../models/pro
 
 const router = express.Router();
 
-router.get('/products', async (req, res) => {
+router.get('/products', async (_req, res) => {
   const result = await getAllProducts();
   return res.status(200).json(result);
 });
