@@ -16,9 +16,14 @@ router.get('/products/:id', async (req, res) => {
 });
 
 router.post('/products', async (req, res) => {
-    const reqBody = req.body;
-    await insertProduct(reqBody);
-    return res.status(201).json(reqBody);
+  const reqBody = req.body;
+  const newId = await getAllProducts();
+  const newProduct = {
+    id: newId.length + 1,
+    ...reqBody,
+  };
+    await insertProduct(newProduct);
+    return res.status(201).json(newProduct);
   });
 
 module.exports = router;

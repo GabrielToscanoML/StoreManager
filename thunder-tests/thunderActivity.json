@@ -8,14 +8,9 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2023-02-13T22:34:50.181Z",
-    "modified": "2023-02-13T23:54:48.588Z",
+    "modified": "2023-02-14T16:30:45.078Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"ProdutoX\"\n}",
-      "form": []
-    },
     "tests": []
   },
   {
