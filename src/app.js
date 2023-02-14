@@ -5,7 +5,7 @@ const salesRouter = require('./routers/sales.router');
 
 const app = express();
 app.use(express.json());
-app.use(productRouter);
+app.use('/products', productRouter);
 app.use(salesRouter);
 
 // não remova esse endpoint, é para o avaliador funcionar

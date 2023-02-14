@@ -54,7 +54,7 @@ describe('cadastro de um produto com valores inválidos', function () {
       // act
       const result = await productsServices.insertProduct(invalidName);
       // assert
-      expect(result.type).to.equal('INVALID_VALUE');
+      expect(result.type).to.equal('INVALID_NAME');
       expect(result.message).to.equal('"name" length must be at least 5 characters long');
     });
 });
