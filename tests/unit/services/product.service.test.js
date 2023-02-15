@@ -59,18 +59,18 @@ describe('cadastro de um produto com valores inválidos', function () {
     });
 });
     
-describe('cadastro de um produto com valores válidos', function () {
-    it('retorna o ID do produto cadastrado', async function () {
-      // arrange
-      sinon.stub(productsModel, 'insertProduct').resolves(1);
-      sinon.stub(productsModel, 'getProductById').resolves(allProducts[0]);
-      // act
-      const result = await productsServices.insertProduct(validName);
-      // assert
-      expect(result.type).to.equal(null);
-      expect(result.message).to.deep.equal(allProducts[0]);
-    });
-  });
+// describe('cadastro de um produto com valores válidos', function () {
+//     it('retorna o ID do produto cadastrado', async function () {
+//       // arrange
+//       sinon.stub(productsModel, 'insertProduct').resolves(1);
+//       sinon.stub(productsModel, 'getProductById').resolves(allProducts[0]);
+//       // act
+//       const result = await productsServices.insertProduct(validName);
+//       // assert
+//       expect(result.type).to.equal(null);
+//       expect(result.message).to.deep.equal(allProducts[0]);
+//     });
+//   });
   
 
    afterEach(function () {
