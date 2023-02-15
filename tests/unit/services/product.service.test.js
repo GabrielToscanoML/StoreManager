@@ -65,10 +65,8 @@ describe('cadastro de um produto com valores válidos', function () {
       sinon.stub(productsModel.productsModel, 'getProductById').resolves(mock.allProducts[0]);
       // act
       const result = await productsServices.productsServices.insertProduct({name: mock.validName});
-      // assert
-
       const allProductsModel = await productsModel.productsModel.getAllProducts();
-
+      // assert
       expect(result.type).to.equal(null);
       expect(result.message.id).to.deep.equal(allProductsModel.length + 1);
     });
