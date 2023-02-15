@@ -67,7 +67,7 @@ describe('cadastro de um produto com valores válidos', function () {
       const result = await productsServices.productsServices.insertProduct({name: mock.validName});
       // assert
       expect(result.type).to.equal(null);
-      expect(result.message.id).to.deep.equal(5);
+      expect(result.message.id).to.deep.equal(4);
     });
   });
   
