@@ -1,5 +1,3 @@
-// tests/unit/controllers/passenger.controller.test.js
-
 const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
@@ -7,8 +5,8 @@ const sinonChai = require('sinon-chai');
 const { expect } = chai;
 chai.use(sinonChai);
 
-const { productsServices } = require('../../../src/services');
-const { productController } = require('../../../src/controllers');
+const productsServices = require('../../../src/services');
+const productController = require('../../../src/controllers');
 
 const { productListMock, productMock, newProductMock } = require('./mocks/product.controller.mock');
 
@@ -22,11 +20,11 @@ describe('Teste de unidade do productController', function () {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
-        .stub(productsServices, 'getAllProducts')
+        .stub(productsServices.productsServices, 'getAllProducts')
         .resolves({ type: null, message: productListMock });
 
       // act
-      await productController.listProducts(req, res);
+      await productController.productController.listProducts(req, res);
 
       // assert
       expect(res.status).to.have.been.calledWith(200);
@@ -45,10 +43,10 @@ describe('Teste de unidade do productController', function () {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
       sinon
-        .stub(productsServices, 'getProductById')
+        .stub(productsServices.productsServices, 'getProductById')
         .resolves({ type: null, message: newProductMock });
       // Act
-      await productController.getProduct(req, res);
+      await productController.productController.getProduct(req, res);
       // Assert
       expect(res.status).to.have.been.calledWith(200);
       expect(res.json).to.have.been.calledWith(newProductMock);
@@ -58,22 +56,21 @@ describe('Teste de unidade do productController', function () {
       // Arrange
       const res = {};
       const req = {
-        params: { id: 'abc' },
+        params: { id: 'aaa' },
       };
 
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub().returns();
-
       sinon
-        .stub(productsServices, 'getProductById')
+        .stub(productsServices.productsServices, 'getProductById')
         .resolves({ type: 'INVALID_VALUE', message: '"id" must be a number' });
 
       // Act
-      await productController.getProduct(req, res);
+      await productController.productController.getProduct(req, res);
 
       // Assert
       expect(res.status).to.have.been.calledWith(404); 
-      expect(res.json).to.have.been.calledWith('"id" must be a number');
+      expect(res.json).to.have.been.calledWith({ type: 'INVALID_VALUE', message: '"id" must be a number' });
     });
 
     it('ao passar um id que não existe no banco deve retornar um erro', async function () {
@@ -87,15 +84,13 @@ describe('Teste de unidade do productController', function () {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(productsServices, 'getProductById')
+        .stub(productsServices.productsServices, 'getProductById')
         .resolves({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
-
       // Act
-      await productController.getProduct(req, res);
-
+      await productController.productController.getProduct(req, res);
       // Assert
       expect(res.status).to.have.been.calledWith(404); 
-      expect(res.json).to.have.been.calledWith('Product not found');
+      expect(res.json).to.have.been.calledWith({ type: 'PRODUCT_NOT_FOUND', message: 'Product not found' });
     });
 
   });
@@ -112,11 +107,11 @@ describe('Cadastrando um novo produto', function () {
       res.json = sinon.stub().returns();
 
       sinon
-        .stub(productsServices, 'insertProduct')
+        .stub(productsServices.productsServices, 'insertProduct')
         .resolves({ type: null, message: newProductMock });
 
       // Act
-      await productController.createProduct(req, res);
+      await productController.productController.createProduct(req, res);
 
       // Assert
       expect(res.status).to.have.been.calledWith(201);

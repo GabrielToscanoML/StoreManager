@@ -9,4 +9,5 @@ const productListMock = [newProductMock];
 module.exports = {
   productMock,
   newProductMock,
+  productListMock,
 }
