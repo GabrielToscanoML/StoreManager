@@ -57,7 +57,7 @@ describe('cadastro de um produto com valores inválidos', function () {
       expect(result.message).to.equal('"name" length must be at least 5 characters long');
     });
 });
-    
+
 describe('cadastro de um produto com valores válidos', function () {
     it('retorna o ID do produto cadastrado', async function () {
       // arrange
