@@ -1,4 +1,3 @@
-// tests/unit/models/passenger.model.test.js
 const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
