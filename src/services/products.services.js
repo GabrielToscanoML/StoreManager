@@ -30,7 +30,6 @@ const insertProduct = async (name) => {
 const updateProductById = async (productName, productId) => {
   const errorId = validateId(productId);
   if (errorId.type) return errorId;
-
   await productsModel.updateById(productName, productId);
   const newProduct = await productsModel.getProductById(productId);
     if (newProduct) return { type: null, message: newProduct };

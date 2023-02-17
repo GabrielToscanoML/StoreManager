@@ -33,7 +33,6 @@ const getSaleById = async (saleId) => {
     ORDER BY StoreManager.sales_products.sale_id, StoreManager.sales_products.product_id;`,
      [saleId],
   );
-  console.log(result);
   return camelize(result);
 };
 
