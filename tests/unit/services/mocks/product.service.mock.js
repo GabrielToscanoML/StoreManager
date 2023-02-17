@@ -7,10 +7,18 @@ const allProducts = [
   },
 ];
 
+const productUpdated = {
+  id: 1,
+  name: 'Eh o Trikas',
+};
+
 const invalidName = 'a';
+const validId = 1;
 
 module.exports = {
   allProducts,
   invalidName,
   validName,
+  validId,
+  productUpdated,
 };

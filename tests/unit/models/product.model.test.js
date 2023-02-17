@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 
 const connection = require('../../../src/models/connection');
-const { products, insertProductMock } = require('./mocks/product.model.mock');
+const { products, insertProductMock, updateProductByIdMock, productsAfterDelete } = require('./mocks/product.model.mock');
 
 describe('Testes de unidade do model de produtos', function () {
   it('Recuperando a lista de produtos', async function () {
@@ -33,6 +33,26 @@ describe('Testes de unidade do model de produtos', function () {
     const result = await productsModel.getAllProducts();
     // Assert
     expect(result).to.be.deep.equal(insertProductMock);
+  });
+
+  it('Atualizando um produto pelo ID', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([updateProductByIdMock]);
+    // Act
+    await productsModel.updateById({ name: "ProdutoX", id: 3 });
+    const result = await productsModel.getAllProducts();
+    // Assert
+    expect(result).to.be.deep.equal(updateProductByIdMock);
+  });
+
+  it('Deletando um produto pelo ID', async function () {
+    // Arrange
+    sinon.stub(connection, 'execute').resolves([productsAfterDelete]);
+    // Act
+    await productsModel.deleteById(3);
+    const result = await productsModel.getAllProducts();
+    // Assert
+    expect(result).to.be.deep.equal(productsAfterDelete);
   });
 
   afterEach(function () {

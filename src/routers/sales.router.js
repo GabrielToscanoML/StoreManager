@@ -1,5 +1,4 @@
 const express = require('express');
-// const { validateProductName } = require('../middlewares/productsServices');
 const { salesController } = require('../controllers');
 const { validateProducts, validateIds } = require('../middlewares/salesMiddleware');
 

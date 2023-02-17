@@ -22,6 +22,7 @@ const updateProduct = async (req, res) => {
   const { name } = req.body;
   const result = await productsServices.updateProductById(name, id);
   if (result.type) return res.status(404).json(result);
+  console.log('result', result.message);
   return res.status(200).json(result.message);
 };
 

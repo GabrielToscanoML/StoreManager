@@ -32,8 +32,35 @@ const insertProductMock = [
   }
 ];
 
+const updateProductByIdMock = [
+  {
+    "id": 1,
+    "name": "Martelo de Thor"
+  },
+  {
+    "id": 2,
+    "name": "Traje de encolhimento"
+  },
+  {
+    "id": 3,
+    "name": "Eh o Trikas"
+  }
+];
+
+const productsAfterDelete = [
+  {
+    "id": 1,
+    "name": "Martelo de Thor"
+  },
+  {
+    "id": 2,
+    "name": "Traje de encolhimento"
+  }
+];
 
 module.exports = {
   products,
   insertProductMock,
+  updateProductByIdMock,
+  productsAfterDelete,
 };

@@ -1,31 +1,32 @@
 const { productsServices } = require('../services');
 
-const validateProducts = async (req, res, next) => {
-  req.body.map(async (item) => {
+const verifyExistence = (productsList) => {
+  const result = productsList.map((item) => {
     const { productId, quantity } = item;
-    if (!productId) {
-      return res.status(400).json({ message: '"productId" is required' });
-    }
+    if (!productId) return ({ type: 400, message: '"productId" is required' });
     if (quantity <= 0) {
-      return res.status(422).json(
-        { message: '"quantity" must be greater than or equal to 1' },
-        );
+      return ({ type: 422, message: '"quantity" must be greater than or equal to 1' });
     }
-    if (!quantity) {
-      return res.status(400).json({ message: '"quantity" is required' });
-    }
-    return next();
+    if (!quantity) return ({ type: 400, message: '"quantity" is required' });
+    return ({ type: null, message: productsList });
   });
+  return result;
 };
 
-const validateIds = async (req, res) => {
-  const productId = await req.body.map(async (item) => {
-    const productExists = await productsServices.getProductById(item.productId);
-    return productExists;
-  });
+const validateProducts = (req, res, next) => {
+  const result = verifyExistence(req.body);
+  const searchError = result.every((item) => item.type === null);
+  const error = result.find((errorType) => errorType.type > 300);
+  if (!searchError) return res.status(error.type).json(error);
+  return next();
+};
+
+const validateIds = async (req, res, next) => {
+  const productId = req.body.map((product) => productsServices.getProductById(product.productId));
   const result = await Promise.all(productId);
-  const teste = result.find((item) => (item.type === 'PRODUCT_NOT_FOUND'));
-  if (teste.type) return res.status(404).json({ message: 'Product not found' });
+  const erro = result.some((product) => product.type !== null);
+  if (erro) return res.status(404).json({ message: 'Product not found' });
+  return next();
 };
 
 module.exports = {

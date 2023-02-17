@@ -8,14 +8,15 @@ const getAllSales = async () => {
 
 const insertSale = async (productsList) => {
   const saleID = await salesModel.insertSale();
-  // console.log('SALEID', saleID);
-  const newSale = {
+  const insertProduct = productsList.map(
+    (product) => salesModel.insertSalesProducts(saleID, product),
+  );
+  await Promise.all(insertProduct);
+    const newSale = {
     id: saleID,
     itemsSold: [...productsList],
   };
-  await salesModel.getAllSales();
-  // console.log('NEWSALE', newSale);
-  return { type: null, message: newSale };
+  return newSale;
 };
 
 module.exports = {
