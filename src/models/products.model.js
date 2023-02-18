@@ -33,10 +33,18 @@ const deleteById = async (productId) => connection.execute(
   [productId],
 );
 
+const getProductByFilter = async () => {
+  const [result] = await connection.execute(
+    'SELECT name FROM StoreManager.products',
+  );
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
   updateById,
   deleteById,
+  getProductByFilter,
 };

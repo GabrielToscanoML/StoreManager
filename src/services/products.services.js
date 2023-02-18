@@ -48,10 +48,19 @@ const deleteProductById = async (productId) => {
   return { type: 'PRODUCT_NOT_FOUND', message: 'Product not found' };
 };
 
+const getProductByFilter = async (filterParam) => {
+  const allProducts = await productsModel.getAllProducts();
+  const resultFilterExistence = allProducts.filter(
+    (products) => products.name.includes(filterParam),
+  );
+  return { type: null, message: resultFilterExistence };
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   insertProduct,
   updateProductById,
   deleteProductById,
+  getProductByFilter,
 };

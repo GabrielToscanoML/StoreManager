@@ -4,6 +4,7 @@ const { productController } = require('../controllers');
 
 const router = express.Router();
 
+router.get('/search', productController.listProductsFiltered);
 router.get('/', productController.listProducts);
 router.get('/:id', productController.getProduct);
 router.post('/', validateProductName, productController.createProduct);

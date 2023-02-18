@@ -46,18 +46,19 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products/2",
-    "url": "http://localhost:3000/sales",
-    "method": "POST",
+    "url": "http://localhost:3000/products/search?q=",
+    "method": "GET",
     "sortNum": 0,
     "created": "2023-02-13T22:39:09.500Z",
-    "modified": "2023-02-16T16:52:41.405Z",
+    "modified": "2023-02-18T19:36:23.175Z",
     "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 5\n  }\n]",
-      "form": []
-    },
+    "params": [
+      {
+        "name": "q",
+        "value": "",
+        "isPath": false
+      }
+    ],
     "tests": []
   },
   {
@@ -65,18 +66,13 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products:id",
-    "url": "http://localhost:3000/sales/1",
+    "url": " http://localhost:3000/products/",
     "method": "GET",
     "sortNum": 0,
     "created": "2023-02-15T19:02:47.681Z",
-    "modified": "2023-02-18T13:30:08.197Z",
+    "modified": "2023-02-18T19:32:08.692Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 10\n  },\n  {\n    \"productId\": 2,\n    \"quantity\": 50\n  }\n]",
-      "form": []
-    },
     "tests": []
   }
 ]

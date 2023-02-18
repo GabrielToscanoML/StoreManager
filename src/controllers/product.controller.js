@@ -32,10 +32,18 @@ const deleteProduct = async (req, res) => {
   return res.status(204).end();
 };
 
+const listProductsFiltered = async (req, res) => {
+  const { q } = req.query;
+  const result = await productsServices.getProductByFilter(q);
+  if (result.type) return res.status(404).json(result);
+  return res.status(200).json(result.message);
+};
+
 module.exports = {
   listProducts,
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  listProductsFiltered,
 };
