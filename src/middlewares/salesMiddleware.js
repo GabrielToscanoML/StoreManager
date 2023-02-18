@@ -1,4 +1,4 @@
-const { productsServices } = require('../services');
+const { productsServices, salesServices } = require('../services');
 
 const verifyExistence = (productsList) => {
   const result = productsList.map((item) => {
@@ -21,7 +21,7 @@ const validateProducts = (req, res, next) => {
   return next();
 };
 
-const validateIds = async (req, res, next) => {
+const validateProductsIds = async (req, res, next) => {
   const productId = req.body.map((product) => productsServices.getProductById(product.productId));
   const result = await Promise.all(productId);
   const erro = result.some((product) => product.type !== null);
@@ -29,7 +29,15 @@ const validateIds = async (req, res, next) => {
   return next();
 };
 
+const validateSalesIds = async (req, res, next) => {
+  const { id } = req.params;
+  const getSaleIfExists = await salesServices.getSaleById(id);
+  if (getSaleIfExists.type) return res.status(404).json({ message: 'Sale not found' });
+  return next();
+};
+
 module.exports = {
   validateProducts,
-  validateIds,
+  validateProductsIds,
+  validateSalesIds,
 };
