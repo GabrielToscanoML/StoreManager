@@ -30,7 +30,6 @@ describe('Testes de unidade do model de sales', function () {
     // Act
     await salesModel.insertSale(productInfo);
     const saleID = await salesModel.insertSalesProducts(3, { productId: 1, quantity: 1 });
-    console.log('Sale Id', saleID);
     const result = await salesModel.getAllSales();
     // Assert
     expect(result).to.be.deep.equal(insertSaleMock);
