@@ -57,6 +57,5 @@ module.exports = {
   insertSalesProducts,
   getSaleById,
   deleteById,
-  // updateSaleById,
   updateSalesProducts,
 };
