@@ -34,7 +34,6 @@ const deleteProduct = async (req, res) => {
 
 const listProductsFiltered = async (req, res) => {
   const { q } = req.query;
-  console.log('Q', q);
   const result = await productsServices.getProductByFilter(q);
   if (result.type) return res.status(404).json(result);
   return res.status(200).json(result.message);

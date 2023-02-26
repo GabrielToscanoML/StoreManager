@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const { productsModel } = require('../../../src/models');
 const { productsServices } = require('../../../src/services');
+const { productFilteredMock } = require('../controllers/mocks/product.controller.mock');
 
 const mock = require('./mocks/product.service.mock');
 
@@ -86,6 +87,28 @@ describe('Verificando service products', function () {
   //     });
   // });
   
+  describe('listagem de produtos com filtro', function () {
+    it('retorna o produto com o filtro aplicado', async function () {
+      // arrange
+      sinon.stub(productsModel, 'getAllProducts').resolves(mock.allProducts);
+      // act
+      const result = await productsServices.getProductByFilter('Mar');
+      // assert
+      expect(result.type).to.be.equal(null);
+      expect(result.message).to.deep.equal(productFilteredMock);
+    });
+
+    it('retorna todos os produtos quando o filtro é vazio', async function () {
+      // arrange
+      sinon.stub(productsModel, 'getAllProducts').resolves(mock.allProducts);
+      // act
+      const result = await productsServices.getProductByFilter();
+      // assert
+      expect(result.type).to.be.equal(null);
+      expect(result.message).to.deep.equal([]);
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
