@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const productsServices = require('../../../src/services');
 const productController = require('../../../src/controllers');
 
-const { productListMock, productMock, newProductMock } = require('./mocks/product.controller.mock');
+const { productListMock, productMock, newProductMock, productFilteredMock } = require('./mocks/product.controller.mock');
 
 describe('Teste de unidade do productController', function () {
   describe('Listando os produtos', function() {
@@ -32,7 +32,7 @@ describe('Teste de unidade do productController', function () {
     });
   });
   
- describe('Buscando um produto por ID', function () {
+  describe('Buscando um produto por ID', function () {
     it('deve responder com 200 e os dados do banco quando existir', async function () {
       // Arrange
       const res = {};
@@ -95,7 +95,7 @@ describe('Teste de unidade do productController', function () {
 
   });
 
-describe('Cadastrando um novo produto', function () {
+  describe('Cadastrando um novo produto', function () {
     it('ao enviar dados válidos deve salvar com sucesso!', async function () {
       // Arrange
       const res = {};
@@ -118,6 +118,31 @@ describe('Cadastrando um novo produto', function () {
       expect(res.json).to.have.been.calledWith(newProductMock);
     });
   });
+
+  describe('Listando os produtos usando filtro', function() {
+    it('Deve retornar o status 200 e o produto', async function () {
+      // arrange
+      const res = {};
+      const req = {
+        query: 'Mar',
+      };
+      
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+      sinon
+        .stub(productsServices.productsServices, 'getProductByFilter')
+        .resolves({ type: null, message: productFilteredMock });
+
+      // act
+      const result = await productController.productController.listProductsFiltered(req, res);
+      console.log('result', result);
+
+      // assert
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWith(productFilteredMock);
+    });
+  });
+  
 
   afterEach(function () {
     sinon.restore();
